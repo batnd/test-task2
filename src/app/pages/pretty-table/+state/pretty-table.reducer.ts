@@ -10,7 +10,6 @@ export const PRETTY_TABLE_FEATURE_KEY: string = 'pretty-table';
 const initialState: PrettyTableState = {
   usersData: [],
   userDataLoadingStatus: null,
-  displayedUsersData: [],
   filters: {
     query: '',
   },
@@ -55,26 +54,6 @@ export const prettyTableFeature = createFeature({
       ...state,
       userDataLoadingStatus: 'error' as LoadingStatus,
     })),
-    on(prettyTableActions.updateDisplayedUsersData, (state: PrettyTableState, { itemsOnPage, currentPage }) => {
-      const newItemsOnPage: number = itemsOnPage ?? state.pagination.itemsOnPage;
-      const newCurrentPage: number = currentPage ?? state.pagination.currentPage;
-      const startIndex: number = (newCurrentPage - 1) * newItemsOnPage;
-      const endIndex: number = startIndex + newItemsOnPage;
-      const totalPages: number = Math.ceil(state.usersData.length / newItemsOnPage);
-
-      const newDisplayedUsersData: UserProfileVm[] = state.usersData.slice(startIndex, endIndex);
-
-      return {
-        ...state,
-        pagination: {
-          ...state.pagination,
-          itemsOnPage: newItemsOnPage,
-          currentPage: newCurrentPage,
-          totalPages,
-        },
-        displayedUsersData: newDisplayedUsersData,
-      };
-    }),
     on(prettyTableActions.updateItemsOnPage, (state: PrettyTableState, { itemsOnPage }) => {
       const totalItems: number = state.usersData.length;
       const totalPages: number = Math.ceil(totalItems / itemsOnPage);
@@ -118,6 +97,7 @@ export const prettyTableFeature = createFeature({
       }
 
       const totalItems: UserProfileVm[] = filterUsers(state.usersData, allFilters, newTags);
+      const totalPages: number = Math.ceil(totalItems.length / state.pagination.itemsOnPage);
 
       return {
         ...state,
@@ -125,7 +105,8 @@ export const prettyTableFeature = createFeature({
         pagination: {
           ...state.pagination,
           totalItems: totalItems.length,
-          currentPage: 1
+          currentPage: 1,
+          totalPages: totalPages
         },
         tags: newTags
       }

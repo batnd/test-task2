@@ -22,27 +22,6 @@ export const selectTags = createSelector(
   (state: PrettyTableState) => state.tags,
 );
 
-export const selectDisplayedUsersData = createSelector(
-  selectPrettyTableState,
-  (state: PrettyTableState) => state.displayedUsersData,
-);
-
-export const selectSortedDisplayedUsersData = createSelector(
-  selectPrettyTableState,
-  selectDisplayedUsersData,
-  (state: PrettyTableState, displayedUsers: UserProfileVm[]) => {
-    const users: UserProfileVm[] = [...displayedUsers];
-    if (state.sort.field && state.sort.direction) {
-      users.sort((a, b) => {
-        const field = state.sort.field as keyof typeof a;
-        const dirMultiplier = state.sort.direction === 'asc' ? 1 : -1;
-        return a[field] > b[field] ? dirMultiplier : a[field] < b[field] ? -dirMultiplier : 0;
-      });
-    }
-    return users;
-  },
-);
-
 export const selectSort = createSelector(
   selectPrettyTableState,
   (state: PrettyTableState) => state.sort,

@@ -6,7 +6,6 @@ import { SortingState } from '@core/models/sorting-state.interface';
 export interface PrettyTableState {
   usersData: UserProfileVm[],
   userDataLoadingStatus: LoadingStatus | null,
-  displayedUsersData: UserProfileVm[],
   filters: {
     query: string
   },

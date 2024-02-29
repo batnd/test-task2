@@ -9,8 +9,6 @@ export const prettyTableActions = createActionGroup({
     loadUsersSuccess: props<{ usersData: UserProfileVm[] }>(),
     loadUsersFailure: props<{ error: string }>(),
 
-    updateDisplayedUsersData: props<{ itemsOnPage?: number, currentPage?: number }>(),
-
     updateItemsOnPage: props<{ itemsOnPage: number }>(),
 
     changeCurrentPage: props<{ newCurrentPage: number }>(),
@@ -23,4 +21,4 @@ export const prettyTableActions = createActionGroup({
 
     showAllUsers: emptyProps()
   }
-})
+});
