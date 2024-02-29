@@ -58,14 +58,58 @@
               }
             }
 
-            &.table-head-last-name {
-
-            }
-
             &.table-head-isActive {
 
               div {
                 justify-content: center;
+              }
+            }
+
+            &.table-head-tags-inputs {
+
+              div.table-head-tags-inputs-wrapper {
+
+                div.inputs-tags {
+                  gap: 5px;
+                  flex-wrap: wrap;
+                  padding-right: 25px;
+
+                  p {
+                    cursor: pointer;
+                    box-sizing: border-box;
+                    padding: 4px;
+                    background-color: #ffffff;
+                    border-radius: 10px;
+                    transition: background-color 0.2s ease;
+                    font-family: "IBM Plex Sans", sans-serif;
+                    font-weight: 400;
+                    font-size: 12px;
+                    border: 1px solid #a2a2a2;
+
+                    &:hover {
+                      background-color: #ececec;
+                    }
+                  }
+                }
+
+                div.clear-filter {
+                  position: absolute;
+                  right: 0;
+                  width: 25px;
+                  height: 25px;
+                  border-radius: 3px;
+
+                  svg {
+                    cursor: pointer;
+                    width: 25px;
+                    height: 25px;
+                    fill: #d9d9d9;
+
+                    &.active {
+                      fill: #e71c2c;
+                    }
+                  }
+                }
               }
             }
 
@@ -222,15 +266,19 @@
 
               div {
                 gap: 5px;
-                //max-width: 230px;
-                //min-width: 180px;
                 flex-wrap: wrap;
 
                 p {
+                  cursor: pointer;
                   box-sizing: border-box;
                   padding: 4px;
                   background-color: #ececec;
                   border-radius: 10px;
+                  transition: background-color 0.2s ease;
+
+                  &:hover {
+                    background-color: #d3d3d3;
+                  }
                 }
               }
             }

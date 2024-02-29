@@ -43,8 +43,8 @@ export class UsersTableComponent implements OnInit {
   @Output()
   public showAllUsersEmit: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  private filterInputSubject: Subject<Filtering> = new Subject<Filtering>();
   private destroyRef: DestroyRef = inject(DestroyRef);
+  private filterInputSubject: Subject<Filtering> = new Subject<Filtering>();
 
   public inputStates: { [key: string]: string } = {
     name: '',
@@ -56,6 +56,7 @@ export class UsersTableComponent implements OnInit {
     balance: '',
     favoriteFruit: '',
   };
+  public inputTagsStates: string[] = [];
 
   ngOnInit(): void {
     this.filterInputSubject.pipe(
@@ -108,4 +109,15 @@ export class UsersTableComponent implements OnInit {
     }
   }
 
+  public chooseTag(tag: string): void {
+    if (!this.inputTagsStates.includes(tag)) {
+      this.inputTagsStates = [...this.inputTagsStates, tag];
+      this.filteringEmit.emit({ field: 'tags', value: tag });
+    }
+  }
+
+  public clearTags(): void {
+    this.inputTagsStates = [];
+    this.filteringEmit.emit({ field: 'tags', value: 'ClearAllTags' });
+  }
 }

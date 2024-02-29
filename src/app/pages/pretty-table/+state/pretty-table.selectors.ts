@@ -16,6 +16,10 @@ export const selectFilters = createSelector(
   selectPrettyTableState,
   (state: PrettyTableState) => state.filter,
 );
+export const selectTags = createSelector(
+  selectPrettyTableState,
+  (state: PrettyTableState) => state.tags,
+);
 
 export const selectDisplayedUsersData = createSelector(
   selectPrettyTableState,
@@ -57,13 +61,17 @@ export const selectCurrentPage = createSelector(
 export const selectFilteredUsers = createSelector(
   selectUsersData,
   selectFilters,
-  (allUsers: UserProfileVm[], filters) => {
+  selectTags,
+  (allUsers: UserProfileVm[], filters, tags: string[]) => {
     return allUsers.filter((user: UserProfileVm) => {
-      return Object.keys(filters).every(key => {
+      const isFiltered: boolean = Object.keys(filters).every((key: string): boolean => {
         if (!filters[key]) return true;
         if (!user[key as keyof typeof user]) return false;
         return user[key as keyof typeof user].toString().toLowerCase().includes(filters[key].toLowerCase());
       });
+      const isTagged: boolean = tags.every((tag: string) => user.tags.includes(tag));
+
+      return isFiltered && isTagged;
     });
   },
 );

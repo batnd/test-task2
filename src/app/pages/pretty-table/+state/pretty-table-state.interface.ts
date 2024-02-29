@@ -13,6 +13,7 @@ export interface PrettyTableState {
   sort: SortingState,
   pagination: Pagination,
   filter: {
-    [key: string]: string
-  }
+    [key: string]: string,
+  },
+  tags: string[]
 }

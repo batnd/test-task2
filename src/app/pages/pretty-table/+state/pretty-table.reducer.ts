@@ -24,6 +24,7 @@ const initialState: PrettyTableState = {
     totalItems: 0,
   },
   filter: {},
+  tags: []
 };
 
 export const prettyTableFeature = createFeature({
@@ -106,24 +107,44 @@ export const prettyTableFeature = createFeature({
       },
     })),
     on(prettyTableActions.filterUsersData, (state: PrettyTableState, { field, value }) => {
-      const allFilters: { [key: string] : string } = { ...state.filter, [field]: value };
+      let newTags: string[] = [];
+      let allFilters: { [key: string] : string } = {};
+
+      if (field === 'tags') {
+        if (value !== 'ClearAllTags') {
+          const initialTags: string[] = [...state.tags];
+          newTags = initialTags.includes(value) ? initialTags : [...initialTags, value];
+          allFilters = { ...state.filter };
+        }
+        allFilters = { ...state.filter };
+      } else {
+        newTags = [...state.tags];
+        allFilters = { ...state.filter, [field]: value };
+      }
 
       const totalItems: UserProfileVm[] =  state.usersData.filter((user: UserProfileVm) => {
-        return Object.keys(allFilters).every(key => {
+        const isFiltered: boolean = Object.keys(allFilters).every((key: string): boolean => {
           if (!allFilters[key]) return true;
           if (!user[key as keyof typeof user]) return false;
+          if (allFilters[key] === 'tags') console.log(allFilters[key], 'tags');
           return user[key as keyof typeof user].toString().toLowerCase().includes(allFilters[key].toLowerCase());
         });
+        let isTagged: boolean = true;
+        if (newTags.length > 0) {
+          isTagged = newTags.every((tag: string) => user.tags.includes(tag));
+        }
+        return isFiltered && isTagged;
       });
 
       return {
         ...state,
-        filter: { ...state.filter, [field]: value },
+        filter: allFilters,
         pagination: {
           ...state.pagination,
           totalItems: totalItems.length > 0 ? totalItems.length : 0,
           currentPage: 1
-        }
+        },
+        tags: newTags
       }
     }),
     on(prettyTableActions.hideUser, (state: PrettyTableState, { userId }) => {
