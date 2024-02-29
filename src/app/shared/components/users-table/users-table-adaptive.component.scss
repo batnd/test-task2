@@ -1,0 +1,195 @@
+.users-table {
+  .users-table-content {
+    table {
+      th {
+        &.table-head-picture {
+          width: 4%;
+          @media screen and (max-width: 2200px) {
+          }
+          @media screen and (max-width: 1920px) {
+          }
+          @media screen and (max-width: 1650px) {
+          }
+          @media screen and (max-width: 1320px) {
+            width: 60px;
+          }
+
+        }
+
+        &.table-head-name {
+          width: 7%;
+          @media screen and (max-width: 2200px) {
+          }
+          @media screen and (max-width: 1920px) {
+          }
+          @media screen and (max-width: 1650px) {
+          }
+          @media screen and (max-width: 1320px) {
+            width: unset;
+            min-width: 95px;
+          }
+        }
+
+        &.table-head-last-name {
+          width: 7%;
+          @media screen and (max-width: 2200px) {
+          }
+          @media screen and (max-width: 1920px) {
+          }
+          @media screen and (max-width: 1650px) {
+          }
+          @media screen and (max-width: 1320px) {
+            width: unset;
+            min-width: 95px;
+          }
+        }
+
+        &.table-head-age {
+          width: 4%;
+          @media screen and (max-width: 2200px) {
+          }
+          @media screen and (max-width: 1920px) {
+          }
+          @media screen and (max-width: 1650px) {
+          }
+          @media screen and (max-width: 1320px) {
+            width: unset;
+            min-width: 65px;
+          }
+        }
+
+        &.table-head-address {
+          @media screen and (max-width: 1320px) {
+            width: unset;
+            min-width: 230px;
+          }
+        }
+
+        &.table-head-email {
+          width: 12%;
+          @media screen and (max-width: 2200px) {
+          }
+          @media screen and (max-width: 1920px) {
+          }
+          @media screen and (max-width: 1650px) {
+            width: 17%;
+          }
+          @media screen and (max-width: 1320px) {
+            width: unset;
+            min-width: 230px;
+          }
+        }
+
+        &.table-head-company {
+          width: 7%;
+          @media screen and (max-width: 1920px) {
+          }
+          @media screen and (max-width: 1650px) {
+            width: 8%;
+          }
+          @media screen and (max-width: 1320px) {
+            width: unset;
+            min-width: 115px;
+          }
+        }
+
+        &.table-head-balance {
+          width: 6%;
+          @media screen and (max-width: 1920px) {
+          }
+          @media screen and (max-width: 1650px) {
+          }
+          @media screen and (max-width: 1320px) {
+            width: unset;
+            min-width: 115px;
+          }
+        }
+
+        &.table-head-tags {
+          width: 10%;
+          @media screen and (max-width: 1920px) {
+          }
+          @media screen and (max-width: 1650px) {
+          }
+          @media screen and (max-width: 1320px) {
+            width: unset;
+            min-width: 140px;
+          }
+        }
+
+        &.table-head-favorite-food {
+          width: 7%;
+          @media screen and (max-width: 1920px) {
+            width: 6%;
+          }
+          @media screen and (max-width: 1650px) {
+            width: 5%;
+          }
+          @media screen and (max-width: 1320px) {
+            width: unset;
+            min-width: 120px;
+          }
+        }
+
+        &.table-head-isActive {
+          width: 4%;
+          @media screen and (max-width: 1920px) {
+          }
+          @media screen and (max-width: 1320px) {
+            width: unset;
+            min-width: 80px;
+          }
+        }
+
+        &.table-head-visibility {
+          width: 4%;
+          @media screen and (max-width: 1920px) {
+            width: 6%;
+          }
+          @media screen and (max-width: 1320px) {
+            width: unset;
+            min-width: 80px;
+          }
+        }
+      }
+    }
+  }
+}
+
+th {
+  div {
+    @media screen and (max-width: 1650px) {
+      font-size: 15px;
+    }
+    @media screen and (max-width: 1320px) {
+      font-size: 14px;
+    }
+  }
+}
+
+.users-table {
+  .users-table-content {
+    table {
+      @media screen and (max-width: 1320px) {
+        min-width: 1320px;
+      }
+
+      tbody {
+        tr {
+          td {
+            div {
+              @media screen and (max-width: 1650px) {
+                font-size: 13px;
+                word-break: break-word;
+              }
+              @media screen and (max-width: 1320px) {
+                font-size: 12px;
+                word-break: unset;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

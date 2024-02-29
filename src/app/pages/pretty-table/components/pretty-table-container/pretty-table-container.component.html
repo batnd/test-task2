@@ -1,0 +1,18 @@
+<div class="pretty-table-container">
+  <app-users-table
+    (showAllUsersEmit)="showAllUsers()"
+    (hideUserEmit)="hideUser($event)"
+    (filteringEmit)="setFiltering($event)"
+    (sortingEmit)="setSorting($event)"
+    [sortingSettings]="sortState$ | async"
+    [usersData]="displayedUsers$ | async"
+    [hiddenUsers]="displayedHiddenUsers$ | async">
+  </app-users-table>
+  <ng-container *ngIf="pagination$ | async as paginationData">
+    <app-pagination
+      (changeCurrentPageEmit)="changeCurrentPage($event)"
+      (changeItemsPerPageEmit)="changeItemsPerPage($event)"
+      [paginationData]="paginationData">
+    </app-pagination>
+  </ng-container>
+</div>

@@ -1,0 +1,42 @@
+<div class="pagination" *ngIf="_paginationData as page">
+  <div class="pagination-items-count">
+    <p>Items per page:</p>
+    <select [(ngModel)]="_paginationData.itemsOnPage" (change)="setItemsPerPage($event)" name="" id="">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+  </div>
+  <div class="pagination-items-total">
+    <p *ngIf="page.totalItems === 0">
+      0 of 0
+    </p>
+    <p *ngIf="page.totalItems > 0">
+      {{ (page.currentPage * page.itemsOnPage - (page.itemsOnPage - 1)) }} - {{ page.currentPage !== page.totalPages ? page.currentPage * page.itemsOnPage : page.totalItems }} of {{ page.totalItems }}
+    </p>
+  </div>
+  <ul class="pagination-navigation">
+    <li class="pagination-navigation-left-end">
+      <button (click)="changeCurrentPage(paginationDirection.LeftEnd)" type="button" [disabled]="page.currentPage === 1">
+        <svg viewBox="0 0 24 24"><path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path></svg>
+      </button>
+    </li>
+    <li class="pagination-navigation-left">
+      <button (click)="changeCurrentPage(paginationDirection.Left)" type="button" [disabled]="page.currentPage === 1">
+        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>
+      </button>
+    </li>
+    <li class="pagination-navigation-right">
+      <button (click)="changeCurrentPage(paginationDirection.Right)" type="button" [disabled]="(page.currentPage === page.totalPages) || (page.totalPages === 0)">
+        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>
+      </button>
+    </li>
+    <li class="pagination-navigation-right-end">
+      <button (click)="changeCurrentPage(paginationDirection.RightEnd)" type="button" [disabled]="(page.currentPage === page.totalPages) || (page.totalPages === 0)">
+        <svg viewBox="0 0 24 24"><path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path></svg>
+      </button>
+    </li>
+  </ul>
+</div>

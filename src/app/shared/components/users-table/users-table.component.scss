@@ -1,0 +1,298 @@
+.users-table {
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+
+  .users-table-content {
+    box-sizing: border-box;
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th, td {
+        box-sizing: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        padding: 8px;
+
+        &:first-child {
+          border-left: none;
+        }
+
+        &:last-child {
+          border-right: none;
+        }
+
+        div {
+          height: 100%;
+          width: 100%;
+          display: flex;
+        }
+      }
+
+      thead {
+
+        tr {
+          background-color: rgba(189, 195, 199, 0.15);
+
+          &:first-child {
+            th {
+              border-top: none;
+            }
+          }
+
+          th {
+
+            &.table-head-picture {
+
+              div {
+                justify-content: center;
+              }
+            }
+
+            &.table-head-age {
+
+              div {
+                justify-content: center;
+              }
+            }
+
+            &.table-head-last-name {
+
+            }
+
+            &.table-head-isActive {
+
+              div {
+                justify-content: center;
+              }
+            }
+
+            &.table-head-visibility {
+
+              div {
+                justify-content: center;
+
+                svg {
+                  width: 25px;
+
+                  &:hover:not(.empty) {
+                    cursor: pointer;
+                    fill: rgba(33, 150, 243, 0.75);
+                  }
+
+                  &.empty {
+                    fill: #b2b2b2;
+                  }
+                }
+              }
+            }
+
+
+            div {
+              justify-content: flex-start;
+              font-family: "IBM Plex Sans", sans-serif;
+              font-weight: 500;
+              column-gap: 5px;
+              align-items: center;
+
+              svg {
+                width: 10px;
+                height: 20px;
+                fill: #3a3a3a;
+                flex-shrink: 0;
+
+                &.filter-asc {
+
+                }
+
+                &.filter-desc {
+                  transform: rotateX(180deg);
+                }
+
+                &.filter-none {
+                  visibility: hidden;
+                }
+              }
+            }
+          }
+
+          &.table-head-filtering {
+
+            th {
+
+              div {
+                position: relative;
+                align-items: center;
+
+                input {
+                  width: 100%;
+                  border: 1px solid rgba(0, 0, 0, 0.15);
+                  outline: none;
+                  padding: 5px;
+                  padding-right: 28px;
+                  box-sizing: border-box;
+                  border-radius: 3px;
+
+                  &:focus {
+                    outline: 2px solid rgba(33, 150, 243, 0.5);
+                    outline-offset: -2px;
+                  }
+                }
+
+                div.clear-filter {
+                  cursor: pointer;
+                  border-top-right-radius: 3px;
+                  border-bottom-right-radius: 3px;
+                  box-sizing: border-box;
+                  border: 1px solid transparent;
+                  position: absolute;
+                  right: 0;
+                  width: 25px;
+                  height: 100%;
+                  justify-content: center;
+                  align-items: center;
+
+                  svg {
+                    width: 25px;
+                    height: 25px;
+                    fill: #d9d9d9;
+
+                    &.active {
+                      fill: #e71c2c;
+                    }
+                  }
+
+                  &:hover {
+                    border: 1px solid rgba(0, 0, 0, 0.15);
+                    background-color: #f1f1f1;
+                  }
+                }
+              }
+            }
+          }
+
+          &.table-head-naming {
+
+            th {
+              &:hover:not(.table-head-picture, .table-head-tags, .table-head-visibility) {
+                cursor: pointer;
+                background-color: rgba(189, 195, 199, 0.25);
+              }
+            }
+          }
+        }
+      }
+
+      tbody {
+
+        tr {
+          &.hidden {
+            background-color: #efefef;
+
+            td {
+              div {
+                display: none;
+              }
+            }
+          }
+
+          td {
+
+            &.table-data-picture {
+
+              div {
+                justify-content: center;
+
+                img {
+                  border-radius: 50%;
+                }
+              }
+            }
+
+            &.table-data-age {
+
+              div {
+                justify-content: center;
+              }
+            }
+
+            &.table-data-tags {
+
+              div {
+                gap: 5px;
+                //max-width: 230px;
+                //min-width: 180px;
+                flex-wrap: wrap;
+
+                p {
+                  box-sizing: border-box;
+                  padding: 4px;
+                  background-color: #ececec;
+                  border-radius: 10px;
+                }
+              }
+            }
+
+            &.table-data-isActive {
+
+              div {
+                justify-content: center;
+                font-weight: 500;
+
+                &.active {
+                  color: green;
+                }
+
+                &.inactive {
+                  color: red;
+                }
+              }
+            }
+
+            &.table-data-visibility {
+
+              div.table-data-visibility-icon {
+                justify-content: center;
+
+                svg {
+                  width: 25px;
+                  cursor: pointer;
+
+                  &.hide {
+                    fill: #b2b2b2;
+                  }
+
+                  &:hover {
+
+                    &.hide {
+                      fill: rgba(33, 150, 243, 0.75);
+                    }
+                  }
+                }
+              }
+            }
+
+            div {
+              font-family: "IBM Plex Sans", sans-serif;
+              font-weight: 400;
+              font-size: 14px;
+            }
+          }
+
+          &:last-child {
+
+            td {
+              border-bottom: unset;
+            }
+          }
+
+          &:hover:not(.hidden) {
+            background-color: rgba(189, 195, 199, 0.07);
+          }
+        }
+      }
+    }
+  }
+}
