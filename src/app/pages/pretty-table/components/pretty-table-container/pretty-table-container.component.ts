@@ -20,7 +20,7 @@ import { UserProfileVm } from '@pages/pretty-table/models/user-profile-vm.interf
   ],
   templateUrl: './pretty-table-container.component.html',
   styleUrl: './pretty-table-container.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrettyTableContainerComponent implements OnInit {
   private readonly prettyTableFacade: PrettyTableFacade = inject(PrettyTableFacade);

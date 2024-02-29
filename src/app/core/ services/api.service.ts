@@ -10,13 +10,13 @@ import { UserProfileVm } from '@pages/pretty-table/models/user-profile-vm.interf
 })
 export class ApiService {
   public get<T>(): Observable<T> {
-    // const randomDelay: number = Math.floor(Math.random() * 1000) + 2000;
+    const randomDelay: number = Math.floor(Math.random() * 1000) + 2000;
 
-    return timer(100)
+    return timer(randomDelay)
       .pipe(
         switchMap(() => {
           const usersProfilesDtoToVm: UserProfileVm[] = userProfileAdapter(data as UserProfile[]);
-          return of(usersProfilesDtoToVm as T)
+          return of(usersProfilesDtoToVm as T);
         })
       );
   }

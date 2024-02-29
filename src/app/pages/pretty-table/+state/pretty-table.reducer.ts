@@ -24,7 +24,7 @@ const initialState: PrettyTableState = {
     totalItems: 0,
   },
   filter: {},
-  tags: []
+  tags: [],
 };
 
 export const prettyTableFeature = createFeature({
@@ -88,7 +88,7 @@ export const prettyTableFeature = createFeature({
     })),
     on(prettyTableActions.filterUsersData, (state: PrettyTableState, { field, value }) => {
       let newTags: string[] = state.tags;
-      let allFilters: { [key: string] : string } = { ...state.filter };
+      let allFilters: { [key: string]: string } = { ...state.filter };
 
       if (field === 'tags') {
         newTags = value !== 'ClearAllTags' ? newTags.includes(value) ? newTags : [...newTags, value] : [];
@@ -106,26 +106,32 @@ export const prettyTableFeature = createFeature({
           ...state.pagination,
           totalItems: totalItems.length,
           currentPage: 1,
-          totalPages: totalPages
+          totalPages: totalPages,
         },
-        tags: newTags
-      }
+        tags: newTags,
+      };
     }),
     on(prettyTableActions.hideUser, (state: PrettyTableState, { userId }) => {
-      const hidingUser: UserProfileVm[] = [...state.usersData].map((user: UserProfileVm): UserProfileVm => user._id === userId ? { ...user, isVisible: false } : user);
+      const hidingUser: UserProfileVm[] = [...state.usersData].map((user: UserProfileVm): UserProfileVm => user._id === userId ? {
+        ...user,
+        isVisible: false,
+      } : user);
 
       return {
         ...state,
-        usersData: hidingUser
-      }
+        usersData: hidingUser,
+      };
     }),
     on(prettyTableActions.showAllUsers, (state: PrettyTableState) => {
-      const showAllUsers: UserProfileVm[] = [...state.usersData].map((user: UserProfileVm): UserProfileVm => ({ ...user, isVisible: true }));
+      const showAllUsers: UserProfileVm[] = [...state.usersData].map((user: UserProfileVm): UserProfileVm => ({
+        ...user,
+        isVisible: true,
+      }));
 
       return {
         ...state,
-        usersData: showAllUsers
-      }
-    })
+        usersData: showAllUsers,
+      };
+    }),
   ),
 });

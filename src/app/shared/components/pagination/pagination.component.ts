@@ -13,7 +13,7 @@ import { PaginationDirection } from '@core/models/pagination-direction.enum';
   ],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginationComponent {
   public _paginationData!: Pagination;

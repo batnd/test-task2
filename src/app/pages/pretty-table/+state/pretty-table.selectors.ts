@@ -32,12 +32,6 @@ export const selectPagination = createSelector(
   (state: PrettyTableState) => state.pagination,
 );
 
-export const selectCurrentPage = createSelector(
-  selectPrettyTableState,
-  (state: PrettyTableState) => state.pagination.currentPage,
-);
-
-
 export const selectFilteredUsers = createSelector(
   selectUsersData,
   selectFilters,
@@ -90,7 +84,7 @@ export const selectCurrentPagination = createSelector(
       currentPage: state.pagination.currentPage,
       itemsOnPage: state.pagination.itemsOnPage,
       totalItems: users.length,
-      totalPages
-    }
+      totalPages,
+    };
   },
 );

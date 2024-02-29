@@ -14,7 +14,7 @@ import { SortingState } from '@core/models/sorting-state.interface';
 import { Filtering } from '@pages/pretty-table/models/filtering.interface';
 
 @Injectable(
-  { providedIn: 'root'}
+  { providedIn: 'root' },
 )
 export class PrettyTableFacade {
   private readonly store: Store = inject(Store);
@@ -26,9 +26,11 @@ export class PrettyTableFacade {
   public loadUsers(): void {
     this.store.dispatch(prettyTableActions.loadUsers());
   }
+
   public changeItemsPerPage(itemsPerPage: number): void {
     this.store.dispatch(prettyTableActions.updateItemsOnPage({ itemsOnPage: itemsPerPage }));
   }
+
   public changeCurrentPage(newCurrentPage: number): void {
     this.store.dispatch(prettyTableActions.changeCurrentPage({ newCurrentPage }));
   }

@@ -19,6 +19,6 @@ export const prettyTableActions = createActionGroup({
 
     hideUser: props<{ userId?: string }>(),
 
-    showAllUsers: emptyProps()
-  }
+    showAllUsers: emptyProps(),
+  },
 });

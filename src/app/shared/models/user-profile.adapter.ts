@@ -16,8 +16,8 @@ export const userProfileAdapter = (userProfiles: UserProfile[]): UserProfileVm[]
       tags: user.tags.length > 0 ? user.tags : [],
       favoriteFruit: user.favoriteFruit ? user.favoriteFruit : '',
       _id: user._id ? user._id : '',
-      isVisible: true
-    }
+      isVisible: true,
+    };
     return userProfileVm;
   });
 };

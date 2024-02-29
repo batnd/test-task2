@@ -8,7 +8,7 @@ import { UserProfileVm } from '@pages/pretty-table/models/user-profile-vm.interf
 export const loadUsers$: FunctionalEffect = createEffect(
   (
     actions$: Actions = inject(Actions),
-    apiService: ApiService = inject(ApiService)
+    apiService: ApiService = inject(ApiService),
   ) => {
     return actions$.pipe(
       ofType(prettyTableActions.loadUsers),
@@ -19,11 +19,11 @@ export const loadUsers$: FunctionalEffect = createEffect(
               prettyTableActions.loadUsersSuccess({ usersData }),
             ]),
             catchError(() => {
-              return of(prettyTableActions.loadUsersFailure({ error: 'Upload error!' }))
-            })
-          )
-      })
-    )
+              return of(prettyTableActions.loadUsersFailure({ error: 'Upload error!' }));
+            }),
+          );
+      }),
+    );
   },
-  { functional: true }
+  { functional: true },
 );
