@@ -4,6 +4,7 @@ import { PrettyTableState } from '@pages/pretty-table/+state/pretty-table-state.
 import { UserProfileVm } from '@pages/pretty-table/models/user-profile-vm.interface';
 import { SortingState } from '@core/models/sorting-state.interface';
 import { Pagination } from '@pages/pretty-table/models/pagination.interface';
+import { filterUsers } from '@pages/pretty-table/utility/filter-users';
 
 export const selectPrettyTableState = createFeatureSelector<PrettyTableState>(PRETTY_TABLE_FEATURE_KEY);
 
@@ -63,16 +64,7 @@ export const selectFilteredUsers = createSelector(
   selectFilters,
   selectTags,
   (allUsers: UserProfileVm[], filters, tags: string[]) => {
-    return allUsers.filter((user: UserProfileVm) => {
-      const isFiltered: boolean = Object.keys(filters).every((key: string): boolean => {
-        if (!filters[key]) return true;
-        if (!user[key as keyof typeof user]) return false;
-        return user[key as keyof typeof user].toString().toLowerCase().includes(filters[key].toLowerCase());
-      });
-      const isTagged: boolean = tags.every((tag: string) => user.tags.includes(tag));
-
-      return isFiltered && isTagged;
-    });
+    return filterUsers(allUsers, filters, tags);
   },
 );
 

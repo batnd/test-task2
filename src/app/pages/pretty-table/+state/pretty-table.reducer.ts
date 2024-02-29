@@ -3,6 +3,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { prettyTableActions } from '@pages/pretty-table/+state/pretty-table.actions';
 import { LoadingStatus } from '@core/models/loading-status.type';
 import { UserProfileVm } from '@pages/pretty-table/models/user-profile-vm.interface';
+import { filterUsers } from '@pages/pretty-table/utility/filter-users';
 
 export const PRETTY_TABLE_FEATURE_KEY: string = 'pretty-table';
 
@@ -107,41 +108,23 @@ export const prettyTableFeature = createFeature({
       },
     })),
     on(prettyTableActions.filterUsersData, (state: PrettyTableState, { field, value }) => {
-      let newTags: string[] = [];
-      let allFilters: { [key: string] : string } = {};
+      let newTags: string[] = state.tags;
+      let allFilters: { [key: string] : string } = { ...state.filter };
 
       if (field === 'tags') {
-        if (value !== 'ClearAllTags') {
-          const initialTags: string[] = [...state.tags];
-          newTags = initialTags.includes(value) ? initialTags : [...initialTags, value];
-          allFilters = { ...state.filter };
-        }
-        allFilters = { ...state.filter };
+        newTags = value !== 'ClearAllTags' ? newTags.includes(value) ? newTags : [...newTags, value] : [];
       } else {
-        newTags = [...state.tags];
-        allFilters = { ...state.filter, [field]: value };
+        allFilters[field] = value;
       }
 
-      const totalItems: UserProfileVm[] =  state.usersData.filter((user: UserProfileVm) => {
-        const isFiltered: boolean = Object.keys(allFilters).every((key: string): boolean => {
-          if (!allFilters[key]) return true;
-          if (!user[key as keyof typeof user]) return false;
-          if (allFilters[key] === 'tags') console.log(allFilters[key], 'tags');
-          return user[key as keyof typeof user].toString().toLowerCase().includes(allFilters[key].toLowerCase());
-        });
-        let isTagged: boolean = true;
-        if (newTags.length > 0) {
-          isTagged = newTags.every((tag: string) => user.tags.includes(tag));
-        }
-        return isFiltered && isTagged;
-      });
+      const totalItems: UserProfileVm[] = filterUsers(state.usersData, allFilters, newTags);
 
       return {
         ...state,
         filter: allFilters,
         pagination: {
           ...state.pagination,
-          totalItems: totalItems.length > 0 ? totalItems.length : 0,
+          totalItems: totalItems.length,
           currentPage: 1
         },
         tags: newTags
